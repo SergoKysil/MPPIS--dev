@@ -23,7 +23,7 @@ namespace MPPIS
         {
             Configuration.Bind("Project", new Config());
 
-            services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString));
+            services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString, b=> b.MigrationsAssembly("MPPIS")));
 
             services.AddMapper();
         }
@@ -44,9 +44,7 @@ namespace MPPIS
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
-                    await context.Response.WriteAsync("\n");
-                    await context.Response.WriteAsync(Config.CompanyName);
+                    await context.Response.WriteAsync("HELLO");
                 });
             });
         }

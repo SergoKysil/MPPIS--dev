@@ -78,7 +78,7 @@ namespace Application.Services.Implementation
             var user = _userRepository.GetAll().FirstOrDefault(user => user.Id == userId);
             if (user == null)
             {
-                throw new ObjectNotFoundException($"There is no user with id = {userId} in database");
+                throw new ObjectNotFoundException($"There is no user with id = {userId}");
             }
             user.IsDeleted = true;
             var affectedRows = await _userRepository.SaveChangesAsync();
