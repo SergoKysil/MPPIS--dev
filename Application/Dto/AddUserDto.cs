@@ -14,6 +14,6 @@
 
         public string PasswordHash { get; set; }
 
-        public LocationDto LocationDto { get; set; }
+        public LocationDto LocationDTO { get; set; }
     }
 }
