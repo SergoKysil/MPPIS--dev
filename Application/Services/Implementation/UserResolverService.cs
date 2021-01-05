@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Security.Claims;
 
-namespace MPPIS.Services.Implementation
+namespace Application.Services.Implementation
 {
     public class UserResolverService : IUserResolverService
     {

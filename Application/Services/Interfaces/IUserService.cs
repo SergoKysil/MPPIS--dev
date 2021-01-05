@@ -8,11 +8,11 @@ namespace Application.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<UserDto> GetById(Expression<Func<User, bool>> predicate);
+        Task<UserDto> GetById(int id);
 
         Task<AddUserDto> AddUser(AddUserDto addUserDto);
 
-        Task<UserDto> FindByEmailAsync(string email);
+        Task<User> Login(LoginDto loginDto);
 
         Task RemoveUser(int userId);
 

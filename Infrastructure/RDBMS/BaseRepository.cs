@@ -7,7 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Infrastructure
+namespace Infrastructure.RDBMS
 {
     public class BaseRepository<TEntity> : IDisposable, IRepository<TEntity> where TEntity : class,  IEntityBase
     {

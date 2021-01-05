@@ -11,6 +11,7 @@ using Application.Services.Interfaces;
 using Domain.RDBMS.Entities;
 using Domain.RDBMS;
 using Infrastructure;
+using System.Security.Authentication;
 
 namespace Application.Services.Implementation
 {
@@ -46,26 +47,35 @@ namespace Application.Services.Implementation
                 return null;
         }
 
-        public async Task<UserDto> FindByEmailAsync(string email)
+        public async Task<User> Login(LoginDto loginDto)
         {
-            var user = await _userRepository.GetAll()
-                .FirstOrDefaultAsync(x => x.Email == email);
-                
-
-            if (user == null || user.IsEmailConfirmed == false)
+            var user = _userRepository.GetAll().FirstOrDefault(p => p.Email == loginDto.Email);
+            if (user == null)
             {
-                throw new ObjectNotFoundException($"There is no user with email = {email} in database");
+                throw new InvalidCredentialException("User not found");
             }
 
-            return _mapper.Map<UserDto>(user);
+            if (!String.IsNullOrWhiteSpace(loginDto.PasswordHash) &&
+                _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, loginDto.PasswordHash) == PasswordVerificationResult.Success &&
+                !user.IsDeleted)
+            {
+                return user;
+            }
+
+            if (_passwordHasher.VerifyHashedPassword(user, user.PasswordHash, loginDto.PasswordHash) == PasswordVerificationResult.Failed)
+            {
+                throw new InvalidCredentialException("Password doesn't fit");
+            }
+
+            return user;
         }
 
-        public async Task<UserDto> GetById(Expression<Func<User, bool>> predicate)
+        public async Task<UserDto> GetById(int id)
         { 
             var user = await _userRepository.GetAll()
                 .Include(p => p.Location)
                 .Include(p => p.Role)
-                .FirstOrDefaultAsync(predicate);
+                .FirstOrDefaultAsync(x=> x.Id == id);
 
             if (user == null)
                 return null;

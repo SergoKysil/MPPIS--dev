@@ -1,17 +1,21 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MPPIS.Services.Implementation;
 using Application.Services.Interfaces;
 using Application.Services.Implementation;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Domain.RDBMS.Entities;
+using Application.Dto;
 
 namespace Application.Services
 {
     public static class ServiceExtensios
     {
-        public static void AddCistomServices(this IServiceCollection services)
+        public static void AddCustomServices(this IServiceCollection services)
         {
+           
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IUserResolverService, UserResolverService>();
+           
+            // services.AddScoped<IUserResolverService, UserResolverService>();
         }
         
         public static void AddMapper(this IServiceCollection services)
