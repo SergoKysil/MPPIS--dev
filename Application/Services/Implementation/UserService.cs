@@ -47,7 +47,7 @@ namespace Application.Services.Implementation
                 return null;
         }
 
-        public async Task<User> Login(LoginDto loginDto)
+        public async Task<UserDto> Login(LoginDto loginDto)
         {
             var user = _userRepository.GetAll().FirstOrDefault(p => p.Email == loginDto.Email);
             if (user == null)
@@ -59,15 +59,15 @@ namespace Application.Services.Implementation
                 _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, loginDto.PasswordHash) == PasswordVerificationResult.Success &&
                 !user.IsDeleted)
             {
-                return user;
+                return _mapper.Map<UserDto>(user);
             }
 
             if (_passwordHasher.VerifyHashedPassword(user, user.PasswordHash, loginDto.PasswordHash) == PasswordVerificationResult.Failed)
             {
-                throw new InvalidCredentialException("Password doesn't fit");
+                return null;
             }
 
-            return user;
+            return null;
         }
 
         public async Task<UserDto> GetById(int id)

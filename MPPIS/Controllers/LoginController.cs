@@ -44,9 +44,10 @@ namespace MPPIS.Controllers
                     PasswordHash = model.Password
                 };
                 var user = _userService.Login(loginDto);
-                if (user == null /*|| user.IsEmailConfirmed == false*/)
+                if (user.Result == null /*|| user.IsEmailConfirmed == false*/)
                 {
-                    throw new ObjectNotFoundException($"There is no user with email = {loginDto.Email} in database");
+                    ModelState.AddModelError("", "There is no user with that email or password!");
+                    return View(model);
                 }
                 return RedirectToAction("Index", "Home");
             }

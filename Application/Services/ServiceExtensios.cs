@@ -15,7 +15,7 @@ namespace Application.Services
            
             services.AddScoped<IUserService, UserService>();
            
-            // services.AddScoped<IUserResolverService, UserResolverService>();
+            //services.AddScoped<IUserResolverService, UserResolverService>();
         }
         
         public static void AddMapper(this IServiceCollection services)

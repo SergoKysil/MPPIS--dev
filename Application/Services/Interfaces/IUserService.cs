@@ -12,7 +12,7 @@ namespace Application.Services.Interfaces
 
         Task<AddUserDto> AddUser(AddUserDto addUserDto);
 
-        Task<User> Login(LoginDto loginDto);
+        Task<UserDto> Login(LoginDto loginDto);
 
         Task RemoveUser(int userId);
 

@@ -7,8 +7,8 @@ namespace Application.Services.Implementation
 {
     public class UserResolverService : IUserResolverService
     {
-        private readonly IHttpContextAccessor _context;
-        public UserResolverService(IHttpContextAccessor context)
+        private readonly HttpContextAccessor _context;
+        public UserResolverService(HttpContextAccessor context)
         {
             _context = context;
         }
