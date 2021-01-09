@@ -46,7 +46,7 @@ namespace Application.Services.Implementation
             else
                 return null;
         }
-
+        #region Login
         public async Task<UserDto> Login(LoginDto loginDto)
         {
             var user = _userRepository.GetAll().FirstOrDefault(p => p.Email == loginDto.Email);
@@ -69,6 +69,7 @@ namespace Application.Services.Implementation
 
             return null;
         }
+        #endregion
 
         public async Task<UserDto> GetById(int id)
         { 
@@ -91,11 +92,11 @@ namespace Application.Services.Implementation
                 throw new ObjectNotFoundException($"There is no user with id = {userId}");
             }
             user.IsDeleted = true;
-            var affectedRows = await _userRepository.SaveChangesAsync();
-            if (affectedRows == 0)
-            {
-                throw new DbUpdateException();
-            }
+            await _userRepository.SaveChangesAsync();
+            //if (affectedRows == 0)
+            //{
+            //    throw new DbUpdateException();
+            //}
             await transaction.CommitAsync();
 
         }

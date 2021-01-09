@@ -97,7 +97,8 @@ namespace Infrastructure.RDBMS
         {
             lock (Context)
             {
-                return  Context.SaveChangesAsync().Result;
+                var result = Context.SaveChangesAsync().Result;
+                return result;
             }
         }
 

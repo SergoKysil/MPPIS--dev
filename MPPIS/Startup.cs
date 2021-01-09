@@ -21,9 +21,11 @@ namespace MPPIS
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
         }
 
         public IConfiguration Configuration;
+
 
 
 
@@ -31,11 +33,11 @@ namespace MPPIS
         {
             Configuration.Bind("Project", new Config());
 
-            
-
             services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString, b=> b.MigrationsAssembly("MPPIS")));
 
             services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddCustomServices();
 
@@ -69,7 +71,7 @@ namespace MPPIS
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Login}/{action=Login}/{id?}");
+                    pattern: "{controller=AddNewUser}/{action=AddNewUser}/{id?}");
                 endpoints.MapRazorPages();
             }); 
 

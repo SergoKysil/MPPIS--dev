@@ -15,7 +15,9 @@ namespace Application.Services
            
             services.AddScoped<IUserService, UserService>();
            
-            //services.AddScoped<IUserResolverService, UserResolverService>();
+            services.AddScoped<IUserResolverService, UserResolverService>();
+
+            services.AddScoped<ILocationService, LocationService>();
         }
         
         public static void AddMapper(this IServiceCollection services)
@@ -26,6 +28,7 @@ namespace Application.Services
                 mc.AddProfile(new MapperProfiles.StorageDataProfile());
                 mc.AddProfile(new MapperProfiles.DayPriceProfile());
                 mc.AddProfile(new MapperProfiles.RouteDayProfile());
+                mc.AddProfile(new MapperProfiles.LocationProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();

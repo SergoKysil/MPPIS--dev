@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using MPPIS.Models;
 using System.Collections.Generic;
 using System.Data.Entity.Core;
@@ -18,7 +19,6 @@ namespace MPPIS.Controllers
 
     public class LoginController : Controller
     {
-     
         readonly IUserService _userService;
 
 
@@ -32,9 +32,9 @@ namespace MPPIS.Controllers
         {
             return View();
         }
+
         [HttpPost]
-        
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<ActionResult<LoginViewModel>> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {

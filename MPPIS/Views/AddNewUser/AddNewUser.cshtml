@@ -1,0 +1,60 @@
+﻿@model MPPIS.Models.AddUserViewModel
+
+<form asp-action="AddNewUser" asp-controller="AddNewUser" >
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+    <div>
+        <div class="form-group">
+            <label asp-for="FirstName">Введіть Ім'я</label>
+            <input asp-for="FirstName" />
+            <span asp-validation-for="FirstName" />
+        </div>
+        <div class="form-group">
+            <label asp-for="MiddleName">Введіть по-батькові</label>
+            <input asp-for="MiddleName" />
+            <span asp-validation-for="MiddleName" />
+        </div>
+        <div class="form-group">
+            <label asp-for="LastName">Введіть прізвище</label>
+            <input asp-for="LastName" />
+            <span asp-validation-for="LastName" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Email">Введіть емейл</label>
+            <input asp-for="Email" />
+            <span asp-validation-for="Email" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Password">Введіть пароль</label>
+            <input  asp-for="Password" />
+            <span asp-validation-for="Password" />
+        </div>
+        <div class="form-group">
+            <label asp-for="City">Введіть місто</label>
+            <input  asp-for="City" />
+            <span asp-validation-for="City" />
+        </div>
+        <div class="form-group">
+            <label asp-for="District">Введіть район</label>
+            <input  asp-for="District" />
+            <span asp-validation-for="District" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Village">Введіть поселення</label>
+            <input  asp-for="Village" />
+            <span asp-validation-for="Village" />
+        </div>
+        <div class="form-group">
+            <label asp-for="Street">Введіть вулицю</label>
+            <input asp-for="Street" />
+            <span asp-validation-for="Street" />
+        </div>
+        <div class="form-group">
+            <label asp-for="HouseNumber">Введіть номер будинку</label>
+            <input  asp-for="HouseNumber" />
+            <span asp-validation-for="HouseNumber" />
+        </div>
+        <div class="form-group">
+            <input type="submit"  value="Додати" class="btn btn-outline-dark" />
+        </div>
+    </div>
+</form>

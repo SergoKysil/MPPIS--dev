@@ -24,6 +24,8 @@ namespace MPPIS.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        public int LocationId { get; set; }
+
         [Required(ErrorMessage = "Ввеідть місто!")]
         public string City { get; set; }
 
