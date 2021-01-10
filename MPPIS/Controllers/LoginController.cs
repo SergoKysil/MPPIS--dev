@@ -34,7 +34,7 @@ namespace MPPIS.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<LoginViewModel>> Login(LoginViewModel model)
+        public async Task<ActionResult<LoginViewModel>> Login([FromForm] LoginViewModel model)
         {
             if (ModelState.IsValid)
             {

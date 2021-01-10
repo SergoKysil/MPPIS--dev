@@ -10,5 +10,11 @@ namespace Application.Services.Interfaces
     public interface ILocationService
     {
         Task<LocationDto> AddNewLocation(LocationDto locationDto);
+
+        Task<LocationDto> GetById(int locationId);
+
+        Task Update(LocationDto locationDto);
+
+        Task<LocationDto> Remove(int locationId);
     }
 }

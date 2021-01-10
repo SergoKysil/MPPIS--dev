@@ -32,42 +32,43 @@ namespace MPPIS.Controllers
 
         [HttpPost]
         // [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<AddUserViewModel>> AddNewUser(AddUserViewModel user)
+        public async Task<ActionResult<AddUserViewModel>> AddNewUser([FromForm] AddUserViewModel user)
         {
             // _logger.LogInformation("Create user {user}", user);
-            // if (ModelState.IsValid)
-            // {
-            LocationDto location = new LocationDto()
+            if (ModelState.IsValid)
             {
-                City = user.City,
-                District = user.District,
-                HouseNumber = user.HouseNumber,
-                Street = user.Street,
-                Village = user.Village
-            };
+                LocationDto location = new LocationDto()
+                {
+                    City = user.City,
+                    District = user.District,
+                    HouseNumber = user.HouseNumber,
+                    Street = user.Street,
+                    Village = user.Village
+                };
 
-            var locationcreated = await _locationService.AddNewLocation(location);
+                var locationcreated = await _locationService.AddNewLocation(location);
 
-            AddUserDto addUserDto = new AddUserDto()
-            {
-                FirstName = user.FirstName,
-                MiddleName = user.MiddleName,
-                LastName = user.LastName,
-                Email = user.Email,
-                PasswordHash = user.Password,
-                LocationId = locationcreated.Id
-            };
-            var createUser = await _userService.AddUser(addUserDto);
-            
-            if (createUser != null)
-            {
-                return CreatedAtAction(nameof(UserController.GetUserId), new { id = createUser.Id }, createUser);
+                AddUserDto addUserDto = new AddUserDto()
+                {
+                    FirstName = user.FirstName,
+                    MiddleName = user.MiddleName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    PasswordHash = user.Password,
+                    LocationId = locationcreated.Id   
+                };
+                var createUser = await _userService.AddUser(addUserDto);
+
+                if (createUser != null)
+                {
+                    RedirectToAction("Index", "Home");
+                    //return CreatedAtAction(nameof(UserController.GetUserId), new { id = createUser.Id }, createUser);
+                }
+                //_logger.LogWarning("User already EXISTS!");
             }
             ModelState.AddModelError("", "Error");
             return View(user);
-            //_logger.LogWarning("User already EXISTS!");
-            //}
-            // return BadRequest();
+            //return BadRequest();
         }
     }
 }
