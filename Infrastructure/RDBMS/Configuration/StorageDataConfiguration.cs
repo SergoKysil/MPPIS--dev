@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.RDBMS.Configuration
 {
-    public class StorageDataConfiguration : IEntityTypeConfiguration<StorageData>
+    public class StorageDataConfiguration : IEntityTypeConfiguration<Product>
     {
-        public void Configure(EntityTypeBuilder<StorageData> builder)
+        public void Configure(EntityTypeBuilder<Product> builder)
         {
             builder.ToTable("StorageData");
 
@@ -29,7 +29,7 @@ namespace Infrastructure.RDBMS.Configuration
             builder.Property(p => p.UserId).HasColumnName("user_id");
 
             builder.HasOne(d => d.User)
-                .WithMany(p => p.StorageData)
+                .WithMany(p => p.Products)
                 .HasForeignKey(k => k.UserId);
 
             builder.Property(p => p.DayPriceId).HasColumnName("day_price_id");

@@ -14,6 +14,6 @@ namespace Application.Dto
 
         public LocationDto LocationDto { get; set; }
 
-        public List<StorageDataDto> StorageDatas { get; set; }
+        public List<ProductDto> Products { get; set; }
     }
 }

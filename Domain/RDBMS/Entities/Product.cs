@@ -2,7 +2,7 @@
 
 namespace Domain.RDBMS.Entities
 {
-    public class StorageData : IEntityBase
+    public class Product : IEntityBase
     {
         public int Id { get; set; }
 

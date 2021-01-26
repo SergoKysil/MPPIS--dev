@@ -1,13 +1,7 @@
 ﻿using Application.Dto;
-using Application.Services.Implementation;
 using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using MPPIS.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace MPPIS.Controllers

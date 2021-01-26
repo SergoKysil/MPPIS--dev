@@ -16,7 +16,7 @@ namespace Infrastructure
         public DbSet<User> User { get; set; }
         public DbSet<Location> Location { get; set; }
         public DbSet<Role> Role { get; set; }
-        public DbSet<StorageData> StorageData { get; set; }
+        public DbSet<Product> StorageData { get; set; }
         public DbSet<DayPrice> DayPrice { get; set; }
         public DbSet<RouteDay> RouteDay { get; set; }
 

@@ -11,6 +11,6 @@ namespace Application.Dto
 
         public DateTime Date { get; set; }
 
-        public List<StorageDataDto> StorageData { get; set; }
+        public List<ProductDto> Products { get; set; }
     }
 }

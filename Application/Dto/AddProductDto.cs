@@ -1,6 +1,6 @@
 ﻿namespace Application.Dto
 {
-    public class AddStorageDataDto
+    public class AddProductDto
     {
         public int? Id { get; set; }
 

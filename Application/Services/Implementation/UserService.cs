@@ -92,11 +92,11 @@ namespace Application.Services.Implementation
                 throw new ObjectNotFoundException($"There is no user with id = {userId}");
             }
             user.IsDeleted = true;
-            await _userRepository.SaveChangesAsync();
-            //if (affectedRows == 0)
-            //{
-            //    throw new DbUpdateException();
-            //}
+            var affectedRows =  await _userRepository.SaveChangesAsync();
+            if (affectedRows == 0)
+            {
+                throw new DbUpdateException();
+            }
             await transaction.CommitAsync();
 
         }

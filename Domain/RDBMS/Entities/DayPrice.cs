@@ -11,7 +11,7 @@ namespace Domain.RDBMS.Entities
 
         public DateTime Date { get; set; }
 
-        public virtual List<StorageData> StorageData { get; set; }
+        public virtual List<Product> StorageData { get; set; }
 
     }
 }

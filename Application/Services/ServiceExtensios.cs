@@ -2,9 +2,6 @@
 using Application.Services.Interfaces;
 using Application.Services.Implementation;
 using AutoMapper;
-using Microsoft.AspNetCore.Identity;
-using Domain.RDBMS.Entities;
-using Application.Dto;
 
 namespace Application.Services
 {
@@ -18,6 +15,10 @@ namespace Application.Services
             services.AddScoped<IUserResolverService, UserResolverService>();
 
             services.AddScoped<ILocationService, LocationService>();
+
+            services.AddScoped<IDayPriceService, DayPriceService>();
+
+            services.AddScoped<IProductService, ProductService>();
         }
         
         public static void AddMapper(this IServiceCollection services)

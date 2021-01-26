@@ -31,7 +31,7 @@ namespace Domain.RDBMS.Entities
 
         public virtual Location Location { get; set; }
 
-        public virtual List<StorageData> StorageData { get; set; }
+        public virtual List<Product> Products { get; set; }
 
 
 

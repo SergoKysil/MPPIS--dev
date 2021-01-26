@@ -8,11 +8,11 @@ namespace Application.MapperProfiles
     {
         public StorageDataProfile()
         {
-            CreateMap<StorageDataDto, Entities.StorageData>().ReverseMap()
+            CreateMap<ProductDto, Entities.Product>().ReverseMap()
                 .ForMember(x => x.DayPrice, opt => opt.MapFrom(x => x.DayPriceId))
                 .ForMember(x => x.User, opt => opt.MapFrom(x => x.UserId));
 
-            CreateMap<AddStorageDataDto, Entities.StorageData>().ReverseMap()
+            CreateMap<AddStorageDataDto, Entities.Product>().ReverseMap()
                 .ForMember(x => x.User, opt => opt.MapFrom(x => x.UserId));
 
         }

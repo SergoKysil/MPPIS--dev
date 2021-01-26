@@ -2,7 +2,7 @@
 
 namespace Application.Dto
 {
-    public class StorageDataDto
+    public class ProductDto
     {
         public int Id { get; set; }
 

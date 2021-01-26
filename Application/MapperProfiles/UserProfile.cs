@@ -19,7 +19,7 @@ namespace Application.MapperProfiles
 
             CreateMap<AddUserDto, Entities.User>().ReverseMap();
 
-            CreateMap<UserProfileDto, Entities.User>().ForMember(x => x.StorageData, opt => opt.MapFrom(x => x.StorageDatas));
+            CreateMap<UserProfileDto, Entities.User>().ForMember(x => x.Products, opt => opt.MapFrom(x => x.Products));
 
 
         }

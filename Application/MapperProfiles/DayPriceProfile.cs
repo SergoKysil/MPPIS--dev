@@ -9,7 +9,7 @@ namespace Application.MapperProfiles
         public DayPriceProfile()
         {
             CreateMap<DayPriceDto, Entities.DayPrice>().ReverseMap()
-                .ForMember(x => x.StorageData, opt => opt.MapFrom(x => x.StorageData));
+                .ForMember(x => x.Products, opt => opt.MapFrom(x => x.StorageData));
 
             CreateMap<AddDayPriceDto, Entities.DayPrice>().ReverseMap();
         }

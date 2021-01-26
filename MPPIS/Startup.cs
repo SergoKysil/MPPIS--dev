@@ -71,7 +71,7 @@ namespace MPPIS
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=AddNewUser}/{action=AddNewUser}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             }); 
 
