@@ -19,6 +19,8 @@ namespace Application.Services
             services.AddScoped<IDayPriceService, DayPriceService>();
 
             services.AddScoped<IProductService, ProductService>();
+
+            services.AddScoped<ITokenService, TokenService>();
         }
         
         public static void AddMapper(this IServiceCollection services)

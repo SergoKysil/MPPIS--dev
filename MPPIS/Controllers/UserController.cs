@@ -26,7 +26,7 @@ namespace MPPIS.Controllers
 
         [HttpGet("id")]
         //[Authorize]
-        public async Task<ActionResult<int>> GetUserId()
+        public async Task<ActionResult<int>> GetUserId([FromRoute] int id)
         {
             _logger.LogInformation("Getting user id");
             var userId = _userResolverService.GetUserId();
