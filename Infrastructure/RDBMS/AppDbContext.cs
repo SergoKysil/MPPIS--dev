@@ -20,6 +20,8 @@ namespace Infrastructure
         public DbSet<DayPrice> DayPrice { get; set; }
         public DbSet<RouteDay> RouteDay { get; set; }
 
+        public DbSet<TokenRefresh> Tokens { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
@@ -35,7 +37,7 @@ namespace Infrastructure
             modelBuilder.ApplyConfiguration(new StorageDataConfiguration());
             modelBuilder.ApplyConfiguration(new DayPriceConfiguration());
             modelBuilder.ApplyConfiguration(new RouteDayConfiguration());
-
+            modelBuilder.ApplyConfiguration(new TokenRefreshConfiguration());
            
 
             DataSeeder.Seed(modelBuilder);

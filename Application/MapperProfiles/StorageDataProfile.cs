@@ -12,7 +12,7 @@ namespace Application.MapperProfiles
                 .ForMember(x => x.DayPrice, opt => opt.MapFrom(x => x.DayPriceId))
                 .ForMember(x => x.User, opt => opt.MapFrom(x => x.UserId));
 
-            CreateMap<AddStorageDataDto, Entities.Product>().ReverseMap()
+            CreateMap<AddProductDto, Entities.Product>().ReverseMap()
                 .ForMember(x => x.User, opt => opt.MapFrom(x => x.UserId));
 
         }

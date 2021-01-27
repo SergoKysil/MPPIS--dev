@@ -33,6 +33,8 @@ namespace Domain.RDBMS.Entities
 
         public virtual List<Product> Products { get; set; }
 
+        public virtual List<TokenRefresh> Tokens { get; set; }
+
 
 
     }
