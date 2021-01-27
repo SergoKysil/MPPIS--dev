@@ -1,4 +1,11 @@
-﻿using Application.Dto;
+﻿using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using Application.Dto;
 using Application.Services.Interfaces;
 using Domain.RDBMS;
 using Domain.RDBMS.Entities;
@@ -6,15 +13,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Authentication;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Services.Implementation
 {
@@ -35,17 +33,19 @@ namespace Application.Services.Implementation
 
         public string GenerateJWT(IEnumerable<Claim> claims)
         {
-            SymmetricSecurityKey symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
-            SigningCredentials credentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtToken:SecretKey"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var issuer = _configuration["JwtToken:Issuer"];
+            var audience = _configuration["JwtToken:Audience"];
+            var jwtValidity = DateTime.Now.AddMinutes(Convert.ToDouble(_configuration["JwtToken:TokenExpiry"]));
 
-            var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"],
-                audience: _configuration["Jwt:Issuer"],
-                claims,
-                expires: DateTime.UtcNow.AddMinutes(120),
-                signingCredentials: credentials);
-            var encodedToken = new JwtSecurityTokenHandler().WriteToken(token);
-            return encodedToken;
+            var token = new JwtSecurityToken(issuer,
+              audience,
+              claims,
+              expires: jwtValidity,
+              signingCredentials: creds);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
         public async Task<string> GenerateRefreshToken(User user)
@@ -120,12 +120,13 @@ namespace Application.Services.Implementation
 
             if (user == null)
             {
-                throw new InvalidCredentialException("User not found");
+                return null;
             }
 
             if (_passwordHasher.VerifyHashedPassword(user, user.PasswordHash, loginModel.PasswordHash) == PasswordVerificationResult.Failed)
             {
-                throw new InvalidCredentialException("Password doesn't fit");
+
+                return null;
             }
 
             return user;

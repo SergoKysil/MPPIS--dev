@@ -2,6 +2,12 @@
 using Application.Services.Interfaces;
 using Application.Services.Implementation;
 using AutoMapper;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System;
+using System.Threading.Tasks;
 
 namespace Application.Services
 {
@@ -36,6 +42,28 @@ namespace Application.Services
 
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper); 
+        }
+
+       public static void AddJWTAuthenticatoin(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = false,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = configuration["JwtToken:Issuer"],
+                    ValidAudience = configuration["JwtToken:Issuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtToken:SecretKey"]))
+                };
+            });
         }
     }
 }
